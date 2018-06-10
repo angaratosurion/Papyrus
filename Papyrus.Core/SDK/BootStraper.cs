@@ -13,6 +13,8 @@ namespace Papyrus.Core.SDK
     {
         [ImportMany(typeof(IFileTypePlugin))]
         public static IEnumerable<Lazy<IFileTypePlugin>> FileTypePlugins;
+        [ImportMany(typeof(IStartupPlugin))]
+        public static IEnumerable<Lazy<IStartupPlugin>> StarttUpPlugins;
         private static CompositionContainer CompositionContainer;
         private static bool IsLoaded = false;
         //   static CommonTools cmTools = new CommonTools();
@@ -76,6 +78,7 @@ namespace Papyrus.Core.SDK
                 CompositionContainer.ComposeParts();
                 PluginInfos = CompositionContainer.GetExports<IPluginInfo>();
                 FileTypePlugins = CompositionContainer.GetExports<IFileTypePlugin>();
+                StarttUpPlugins = CompositionContainer.GetExports<IStartupPlugin>();
 
 
                 Catlgs = catalog;
